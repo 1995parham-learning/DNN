@@ -9,3 +9,12 @@ They proposed a way to alliviate the unstable gradients problem. We need the sig
   $$
 </center>
 
+
+<div style="text-align:center">
+
+$$
+\sum_{i=1}^{n} x_i = x_1 + x_2 + \cdots + x_n
+$$
+
+</div>
+
