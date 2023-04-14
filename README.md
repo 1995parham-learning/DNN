@@ -4,10 +4,10 @@ They proposed a way to alliviate the unstable gradients problem. We need the sig
 
 <div style="text-align:center">
   Normal distribution with mean 0 and variance 
-  $$
-  \sigma^2 = 1/fan_{avg}
-  $$
 </div>
+$$
+  \sigma^2 = 1/fan_{avg}
+$$
 
 
 
