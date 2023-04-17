@@ -13,6 +13,6 @@ To compute $\sum^+$ the algorithm takes $\sum$ and sets to zero all values small
 ## Initialization
 | Initialization | Activation functions | $\sigma^2$ (Normal) |
 | -------- | -------- | -------- |
-| Row 1, Column 1 | Row 1, Column 2 | Row 1, Column 3 |
-| Row 2, Column 1 | Row 2, Column 2 | Row 2, Column 3 |
-| Row 3, Column 1 | Row 3, Column 2 | Row 3, Column 3 |
+| Glorot | None, tanh, sigmoid, softmax             | $1/fan_{avg}$ |
+| He     | ReLU, Leaky ReLU, ELU, GELU, Swish, Mish | $2/fan_{in}$  |
+| LeCun  | SELU                                     | $a/fan_{in}$ |
