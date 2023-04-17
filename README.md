@@ -5,3 +5,5 @@ They proposed a way to alliviate the unstable gradients problem. We need the sig
 Normal distribution with mean 0 and variance: $$\sigma^2 = 1/fan_{avg}$$
 Or a uniform distribution between $-r$ and $+r$, with $$r = \sqrt{3/fan_{avg}}$$
 
+## Pseudoinverse
+Using SVD, we decomposition matrix $X$ into $U \sigma V^T$ 
