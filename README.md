@@ -11,7 +11,7 @@ $$X^+ = V \sum^+ U^T$$
 To compute $\sum^+$ the algorithm takes $\sum$ and sets to zero all values smaller than a tiny threshold value, then it replaces all nonzero values with their inverse and finally it transposes the resulting matrix
 
 ## Initialization
-| Initialization | Activation functions | \sigma^2 (Normal) |
+| Initialization | Activation functions | $\sigma^2$ (Normal) |
 | -------- | -------- | -------- |
 | Row 1, Column 1 | Row 1, Column 2 | Row 1, Column 3 |
 | Row 2, Column 1 | Row 2, Column 2 | Row 2, Column 3 |
