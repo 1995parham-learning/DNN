@@ -15,4 +15,4 @@ To compute $\sum^+$ the algorithm takes $\sum$ and sets to zero all values small
 | -------- | -------- | -------- |
 | Glorot | None, tanh, sigmoid, softmax             | $1/fan_{avg}$ |
 | He     | ReLU, Leaky ReLU, ELU, GELU, Swish, Mish | $2/fan_{in}$  |
-| LeCun  | SELU                                     | $a/fan_{in}$ |
+| LeCun  | SELU                                     | $1/fan_{in}$  |
