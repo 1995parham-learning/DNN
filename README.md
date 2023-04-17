@@ -6,4 +6,6 @@ Normal distribution with mean 0 and variance: $$\sigma^2 = 1/fan_{avg}$$
 Or a uniform distribution between $-r$ and $+r$, with $$r = \sqrt{3/fan_{avg}}$$
 
 ## Pseudoinverse
-Using SVD, we decomposition matrix $X$ into $U \sigma V^T$ 
+Using SVD, we decomposition matrix $X$ into $U \sum V^T$. 
+$$X^+ = V \sum^+ U^T$$
+To compute $\sum^+$ the algorithm takes $\sum$ and sets to zero all values smaller than a tiny threshold value, then it replaces all nonzero values with their inverse and finally it transposes the resulting matrix
