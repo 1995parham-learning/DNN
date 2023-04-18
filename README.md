@@ -23,3 +23,4 @@ To compute $\sum^+$ the algorithm takes $\sum$ and sets to zero all values small
 Once a dataset has been clustered, it is usually possible to measure each instance's affinity with each cluster. Each instances's feature vector **x** can then be replaces with the vector of its cluster affinities. If there are $k$ clusters, then this vector is k-dimensional. The new vector is typically much lower-dimensional but it can preserve enough information.
 
 ### Feature engineering
+The cluster affinites can often be useful as extra features.
