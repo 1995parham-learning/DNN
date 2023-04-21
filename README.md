@@ -29,3 +29,18 @@ The cluster affinites can often be useful as extra features.
 We use the "sparse_categorical_crossentropy" loss because we have sparse labels (i.e., for each instance, there is just a target class index, from 0 to 9), and classes are exclusive. If instead we had one target probability per class for each instance (such as one-hot vectors, e.g., [0, 0, 0, 1, 0, 0, 0, 0, 0, 0] to represent class 3), then we would need to use the "categorical_crossentropy" loss instead.
 
 If we were doing binary classification or multilable binary classification, then we would use the "sigmoid" activation function in the output layer instead of "softmax" activation function, and we would use the "binary_crossentropy" loss.
+
+## Running TF Serving in a Docker Container
+``sh
+docker pull tensorflow/serving
+``
+
+``sh
+docker run -it --rm -v "/home/raha/Desktop/DNN/my_mnist_model:/models/my_mnist_model" -p 8500:8500 -p 8501:8501 -e MODEL_NAME=my_mnist_model tensorflow/serving
+``
+
+1. -it: Makes the container interactive and displays the server's output
+2. --rm
+3. -v: Makes the host's my_mnist_model directory available to the container at the path /models/my_mnist_model
+4. -p: The Docker image is configured to use port 8500 to serve the gRPC API and 8501 to serve the REST API by default.
+5. -e: Sets the container's MODEL_NAME environment variable, so TF Serving knows which model to serve. By default, it will look for models in the /models directory and it will automatically serve the latest version it finds.
