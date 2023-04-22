@@ -1,0 +1,9 @@
+name: playground
+channels:
+  - conda-forge
+dependencies:
+  - tensorflow
+  - jupyterlab
+  - geopandas
+  - scikit-learn
+always_yes: false
