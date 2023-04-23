@@ -72,3 +72,22 @@ Measure the validation error every N steps and reduce the learning rate by a fac
 1. An MLP may not have any activation function for the output layer, so it's free to output any value, this is generally fine.
 2. If you want to guarantee that the output will always be positive, then you should use the ReLU activation function in the output layer, or the softplus activation function, which is a smooth variant of ReLU.
 3. If you want to guarantee that the predictions will always fall within a given range of values, then you should use the sigmoid function or the hyperbolic tagent and scale the targets to the appropriate range
+
+## Loss Function
+1. You usually want mean squared error for regression
+2. If you have a lot of outliers in the training set, you may prefer mean absolute error
+3. You may want to use Huber loss, which is a combination of both
+
+### Huber Loss
+It is quadratic when the error is smaller than a threshold $\delta$ (typically 1) but linear when the error is larger than $\delta$. The linear part makes it less sensitive to outliers than the mean squared error, and the quadratic part allows it to converge faster and be more precise than the mean absolute error.
+
+## Typical Regression MLP Architecture
+
+| Hyperparameter             | Typical value                                                                     | 
+| -------------------------- | --------------------------------------------------------------------------------- |
+| # hidden layers            | Typically 1 to 5                                                                  | 
+| # neurons per hidden layer | Typically 10 to 100                                                               | 
+| # output neurons           | 1 per prediction dimension                                                        | 
+| Hidden activation          | ReLU                                                                              | 
+| Output activation          | None, or ReLU/softplus (if positive outputs) or sigmoid/tanh (if bounded outputs) | 
+| Loss function.             | MSE, or Huber if outliers                                                         | 
