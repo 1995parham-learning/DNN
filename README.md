@@ -54,3 +54,21 @@ docker run -it --rm -v "/home/raha/Desktop/DNN/my_mnist_model:/models/my_mnist_m
 
 ## Learning rate Scheduling
 If you set it slightly too high, it will make progress very quickly at first, but it will end up dancing around the optimum and never really settling down
+
+
+### Power Scheduling
+A function of the iteration number, $t: \eta(t) = \eta_0 / (1 + t/s)^c$
+
+### Exponential Scheduling
+$\eta(t) = \eta_0 0.1^{t/s}$
+
+### Piecewise Constant Scheduling
+Use a constant learning rate for a number of epochs then a smaller learning rate for another number of epochs
+
+### Performance Scheduling
+Measure the validation error every N steps and reduce the learning rate by a factor of $\lambda$ when the error stops dropping
+
+## Output Layer Activation Function
+1. An MLP may not have any activation function for the output layer, so it's free to output any value, this is generally fine.
+2. If you want to guarantee that the output will always be positive, then you should use the ReLU activation function in the output layer, or the softplus activation function, which is a smooth variant of ReLU.
+3. If you want to guarantee that the predictions will always fall within a given range of values, then you should use the sigmoid function or the hyperbolic tagent and scale the targets to the appropriate range
