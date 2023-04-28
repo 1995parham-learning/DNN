@@ -94,3 +94,16 @@ It is quadratic when the error is smaller than a threshold $\delta$ (typically 1
 
 # Callbacks
 You can combine both ModelCheckpoint and EarlyStopping callbacks to save checkpoints of your model in case your computer crashes, and interrupt training early when there is no more progress. The number of epochs can be set to a large value then, just make sure the learning rate is not too small, or else it might keep making slow progress until the end.
+
+# Fine-Tuning
+## Number of Hidden Layers
+An MLP with just one hidden layer can theoretically model even the most complex functions, provided it has enough neurons. But for complex problems, deep networks have a much higher parameter efficiency than shallow ones: they can model complex functions using exponentially fewer neurons than shallow nets, allowing them to reach much better performance with the same amount of training data.
+
+To understand why, suppose you are asked to draw a forest using some drawing software, but you are forbidden to copy and paste anything. It would take an enormous amount of time: you would have to draw each tree individually, branch by branch, leaf by leaf. If you could instead draw one leaf, copy and paste it to draw a branch, then copy and paste that branch to create a tree, and finally copy and paste this tree to make a forest, you would be finished in no time.
+
+Real-world data is often structured in such a hierarchical way, and deep neural networks automatically take advantage of this fact: lower hidden layers model low-level structures (e.g., line segments of various shapes and orientations), intermediate hidden layers combine these low-level structures to model intermediate-level structures (e.g., squares, circles), and the highest hidden layers and the output layer combine these intermediate structures to model high-level structures (e.g., faces)
+
+This hierarchical architecture help DNNs:
+1. converge faster
+2. improves their ability to generalize to new datasets
+
