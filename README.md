@@ -91,3 +91,6 @@ It is quadratic when the error is smaller than a threshold $\delta$ (typically 1
 | Hidden activation          | ReLU                                                                              | 
 | Output activation          | None, or ReLU/softplus (if positive outputs) or sigmoid/tanh (if bounded outputs) | 
 | Loss function.             | MSE, or Huber if outliers                                                         | 
+
+# Callbacks
+You can combine both ModelCheckpoint and EarlyStopping callbacks to save checkpoints of your model in case your computer crashes, and interrupt training early when there is no more progress. The number of epochs can be set to a large value then, just make sure the learning rate is not too small, or else it might keep making slow progress until the end.
