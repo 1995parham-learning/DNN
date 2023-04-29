@@ -102,4 +102,4 @@ This hierarchical architecture help DNNs:
 
 # RNN
 Output of a recurrent layer for a single instance
-$$y_t = \phi(W_x^T x_t + W_y^T y_{t-1} + b)$$
+$$y_{(t)} = \phi(W_x^T x_{(t)} + W_y^T y_{(t-1)} + b)$$
