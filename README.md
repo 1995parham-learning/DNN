@@ -45,13 +45,6 @@ docker run -it --rm -v "/home/raha/Desktop/DNN/my_mnist_model:/models/my_mnist_m
 4. -p: The Docker image is configured to use port 8500 to serve the gRPC API and 8501 to serve the REST API by default.
 5. -e: Sets the container's MODEL_NAME environment variable, so TF Serving knows which model to serve. By default, it will look for models in the /models directory and it will automatically serve the latest version it finds.
 
-### Json vs gRPC
-| Aspect   | Json     | gRPC     | extra explanation |
-| -------- | -------- | -------- |
-| Glorot   | None, tanh, sigmoid, softmax             | $1/fan_{avg}$ |
-| He       | ReLU, Leaky ReLU, ELU, GELU, Swish, Mish | $2/fan_{in}$  |
-| LeCun    | SELU                                     | $1/fan_{in}$  |
-
 ## Learning rate Scheduling
 If you set it slightly too high, it will make progress very quickly at first, but it will end up dancing around the optimum and never really settling down
 
@@ -107,3 +100,6 @@ This hierarchical architecture help DNNs:
 1. converge faster
 2. improves their ability to generalize to new datasets
 
+# RNN
+Output of a recurrent layer for a single instance
+$$y_t = \phi(W_x^T x_t + W_y^T y_{t-1} + b)$$
