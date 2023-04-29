@@ -25,6 +25,7 @@ Once a dataset has been clustered, it is usually possible to measure each instan
 ### Feature engineering
 The cluster affinites can often be useful as extra features.
 
+
 ## Losses, Optimizers, Activation Functions
 We use the "sparse_categorical_crossentropy" loss because we have sparse labels (i.e., for each instance, there is just a target class index, from 0 to 9), and classes are exclusive. If instead we had one target probability per class for each instance (such as one-hot vectors, e.g., [0, 0, 0, 1, 0, 0, 0, 0, 0, 0] to represent class 3), then we would need to use the "categorical_crossentropy" loss instead.
 
@@ -108,3 +109,6 @@ $$y(t) = \phi(W_x^T x(t) + W_y^T y(t-1) + b)$$
 $Y(t)$ is a function of $X(t)$ and $Y(t-1)$ which is a function of $X(t-1)$ and $Y(t-2)$ and so on. This makes $Y(t)$ a function of all the inputs since  time = 0.
 
 Since the output of a recurrent neuron at time step $t$ is a function of all the inputs from previous time steps, you could say it has a form of memory.
+
+## Autocorrelated
+When a time series is correlated with a lagged version of itself, we say that the time series is autocorrelated.
