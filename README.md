@@ -103,3 +103,8 @@ This hierarchical architecture help DNNs:
 # RNN
 Output of a recurrent layer for a single instance
 $$y(t) = \phi(W_x^T x(t) + W_y^T y(t-1) + b)$$
+
+## Memory Cells
+$Y(t)$ is a function of $X(t)$ and $Y(t-1)$ which is a function of $X(t-1)$ and $Y(t-2)$ and so on. This makes $Y(t)$ a function of all the inputs since  time = 0.
+
+Since the output of a recurrent neuron at time step $t$ is a function of all the inputs from previous time steps, you could say it has a form of memory.
