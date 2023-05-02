@@ -112,3 +112,6 @@ Since the output of a recurrent neuron at time step $t$ is a function of all the
 
 ## Autocorrelated
 When a time series is correlated with a lagged version of itself, we say that the time series is autocorrelated.
+
+## Random Forest
+The random forest algorithm introduces extra randomness when growing trees; instead of searching for the very best feature when splitting a node, it searches for the best feature among a random subset of features. By default, it samples $\sqrt(n)$ features. The algorithm results in greater tree diversity, which trades a higher bias for a lower variance
