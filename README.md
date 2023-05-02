@@ -107,4 +107,15 @@ $$y(t) = \phi(W_x^T x(t) + W_y^T y(t-1) + b)$$
 ## Memory Cells
 $Y(t)$ is a function of $X(t)$ and $Y(t-1)$ which is a function of $X(t-1)$ and $Y(t-2)$ and so on. This makes $Y(t)$ a function of all the inputs since  time = 0.
 
-Since the output of a recurrent neuron at time step $t$ is a function of all the inputs from previous time steps, you could say it has a form of memory.
+Since the output of a recurrent neuron at time step $t$ is a function of all the inputs from previous time steps, you could say it has a form of memory. A single recurrent neuron, or a layer of recurrent neurons, is a very basic cell, capable of learning only short patterns (typically about 10 steps long).
+
+A cell's state ($h(t)$, h stands for hidden) is: $$h(t) = f_1(x(t), h(t-1))$$
+Its output is $$y(t) = f_2(x(t), h(t-1))$$
+In the case of the basic cells, the output is just equal to the state, but in more complex cells this is not always the case.
+
+## Input and Output Sequences
+1. sequence-to-sequence network: forcast time series
+2. sequence-to-vector network: feed a movie review words and output a sentiment score
+3. vector-to-sequence network: captioning an image
+4. encoder-decoder: translating a sentence, encoder: sequence-to-vector network, decoder: vector-to-sequence network
+![RNN](img/RNN.ipg)
