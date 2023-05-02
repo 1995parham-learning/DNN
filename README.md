@@ -25,6 +25,7 @@ Once a dataset has been clustered, it is usually possible to measure each instan
 ### Feature engineering
 The cluster affinites can often be useful as extra features.
 
+
 ## Losses, Optimizers, Activation Functions
 We use the "sparse_categorical_crossentropy" loss because we have sparse labels (i.e., for each instance, there is just a target class index, from 0 to 9), and classes are exclusive. If instead we had one target probability per class for each instance (such as one-hot vectors, e.g., [0, 0, 0, 1, 0, 0, 0, 0, 0, 0] to represent class 3), then we would need to use the "categorical_crossentropy" loss instead.
 
@@ -119,3 +120,9 @@ In the case of the basic cells, the output is just equal to the state, but in mo
 3. vector-to-sequence network: captioning an image
 4. encoder-decoder: translating a sentence, encoder: sequence-to-vector network, decoder: vector-to-sequence network
 ![RNN](img/RNN.ipg)
+
+## Autocorrelated
+When a time series is correlated with a lagged version of itself, we say that the time series is autocorrelated.
+
+## Random Forest
+The random forest algorithm introduces extra randomness when growing trees; instead of searching for the very best feature when splitting a node, it searches for the best feature among a random subset of features. By default, it samples $\sqrt n$ features. The algorithm results in greater tree diversity, which trades a higher bias for a lower variance
