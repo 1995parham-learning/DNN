@@ -13,9 +13,9 @@ To compute $\sum^+$ the algorithm takes $\sum$ and sets to zero all values small
 ## Initialization
 | Initialization | Activation functions | $\sigma^2$ (Normal) |
 | -------- | -------- | -------- |
-| Glorot | None, tanh, sigmoid, softmax             | $1/fan_{avg}$ |
-| He     | ReLU, Leaky ReLU, ELU, GELU, Swish, Mish | $2/fan_{in}$  |
-| LeCun  | SELU                                     | $1/fan_{in}$  |
+| Glorot   | None, tanh, sigmoid, softmax             | $1/fan_{avg}$ |
+| He       | ReLU, Leaky ReLU, ELU, GELU, Swish, Mish | $2/fan_{in}$  |
+| LeCun    | SELU                                     | $1/fan_{in}$  |
 
 ## Clustering Algorithms applications
 
@@ -24,6 +24,7 @@ Once a dataset has been clustered, it is usually possible to measure each instan
 
 ### Feature engineering
 The cluster affinites can often be useful as extra features.
+
 
 ## Losses, Optimizers, Activation Functions
 We use the "sparse_categorical_crossentropy" loss because we have sparse labels (i.e., for each instance, there is just a target class index, from 0 to 9), and classes are exclusive. If instead we had one target probability per class for each instance (such as one-hot vectors, e.g., [0, 0, 0, 1, 0, 0, 0, 0, 0, 0] to represent class 3), then we would need to use the "categorical_crossentropy" loss instead.
@@ -44,3 +45,88 @@ docker run -it --rm -v "/home/raha/Desktop/DNN/my_mnist_model:/models/my_mnist_m
 3. -v: Makes the host's my_mnist_model directory available to the container at the path /models/my_mnist_model
 4. -p: The Docker image is configured to use port 8500 to serve the gRPC API and 8501 to serve the REST API by default.
 5. -e: Sets the container's MODEL_NAME environment variable, so TF Serving knows which model to serve. By default, it will look for models in the /models directory and it will automatically serve the latest version it finds.
+
+## Learning rate Scheduling
+If you set it slightly too high, it will make progress very quickly at first, but it will end up dancing around the optimum and never really settling down
+
+
+### Power Scheduling
+A function of the iteration number, $t: \eta(t) = \eta_0 / (1 + t/s)^c$
+
+### Exponential Scheduling
+$\eta(t) = \eta_0 0.1^{t/s}$
+
+### Piecewise Constant Scheduling
+Use a constant learning rate for a number of epochs then a smaller learning rate for another number of epochs
+
+### Performance Scheduling
+Measure the validation error every N steps and reduce the learning rate by a factor of $\lambda$ when the error stops dropping
+
+## Output Layer Activation Function
+1. An MLP may not have any activation function for the output layer, so it's free to output any value, this is generally fine.
+2. If you want to guarantee that the output will always be positive, then you should use the ReLU activation function in the output layer, or the softplus activation function, which is a smooth variant of ReLU.
+3. If you want to guarantee that the predictions will always fall within a given range of values, then you should use the sigmoid function or the hyperbolic tagent and scale the targets to the appropriate range
+
+## Loss Function
+1. You usually want mean squared error for regression
+2. If you have a lot of outliers in the training set, you may prefer mean absolute error
+3. You may want to use Huber loss, which is a combination of both
+
+### Huber Loss
+It is quadratic when the error is smaller than a threshold $\delta$ (typically 1) but linear when the error is larger than $\delta$. The linear part makes it less sensitive to outliers than the mean squared error, and the quadratic part allows it to converge faster and be more precise than the mean absolute error.
+
+## Typical Regression MLP Architecture
+
+| Hyperparameter             | Typical value                                                                     | 
+| -------------------------- | --------------------------------------------------------------------------------- |
+| # hidden layers            | Typically 1 to 5                                                                  | 
+| # neurons per hidden layer | Typically 10 to 100                                                               | 
+| # output neurons           | 1 per prediction dimension                                                        | 
+| Hidden activation          | ReLU                                                                              | 
+| Output activation          | None, or ReLU/softplus (if positive outputs) or sigmoid/tanh (if bounded outputs) | 
+| Loss function.             | MSE, or Huber if outliers                                                         | 
+
+# Callbacks
+You can combine both ModelCheckpoint and EarlyStopping callbacks to save checkpoints of your model in case your computer crashes, and interrupt training early when there is no more progress. The number of epochs can be set to a large value then, just make sure the learning rate is not too small, or else it might keep making slow progress until the end.
+
+# Fine-Tuning
+## Number of Hidden Layers
+An MLP with just one hidden layer can theoretically model even the most complex functions, provided it has enough neurons. But for complex problems, deep networks have a much higher parameter efficiency than shallow ones: they can model complex functions using exponentially fewer neurons than shallow nets, allowing them to reach much better performance with the same amount of training data.
+
+To understand why, suppose you are asked to draw a forest using some drawing software, but you are forbidden to copy and paste anything. It would take an enormous amount of time: you would have to draw each tree individually, branch by branch, leaf by leaf. If you could instead draw one leaf, copy and paste it to draw a branch, then copy and paste that branch to create a tree, and finally copy and paste this tree to make a forest, you would be finished in no time.
+
+Real-world data is often structured in such a hierarchical way, and deep neural networks automatically take advantage of this fact: lower hidden layers model low-level structures (e.g., line segments of various shapes and orientations), intermediate hidden layers combine these low-level structures to model intermediate-level structures (e.g., squares, circles), and the highest hidden layers and the output layer combine these intermediate structures to model high-level structures (e.g., faces)
+
+## Batch Size
+The main benefit of using large batch sizes is that hardware accelerators like GPUs can process them efficiently but large batch sizes often lead to training instabilities, especially at the beginning of training, and the resulting model may not generalize as well as a model trained with a small batch size.
+
+
+This hierarchical architecture help DNNs:
+1. converge faster
+2. improves their ability to generalize to new datasets
+
+# RNN
+Output of a recurrent layer for a single instance
+$$y(t) = \phi(W_x^T x(t) + W_y^T y(t-1) + b)$$
+
+## Memory Cells
+$Y(t)$ is a function of $X(t)$ and $Y(t-1)$ which is a function of $X(t-1)$ and $Y(t-2)$ and so on. This makes $Y(t)$ a function of all the inputs since  time = 0.
+
+Since the output of a recurrent neuron at time step $t$ is a function of all the inputs from previous time steps, you could say it has a form of memory. A single recurrent neuron, or a layer of recurrent neurons, is a very basic cell, capable of learning only short patterns (typically about 10 steps long).
+
+A cell's state ($h(t)$, h stands for hidden) is: $$h(t) = f_1(x(t), h(t-1))$$
+Its output is $$y(t) = f_2(x(t), h(t-1))$$
+In the case of the basic cells, the output is just equal to the state, but in more complex cells this is not always the case.
+
+## Input and Output Sequences
+1. sequence-to-sequence network: forcast time series
+2. sequence-to-vector network: feed a movie review words and output a sentiment score
+3. vector-to-sequence network: captioning an image
+4. encoder-decoder: translating a sentence, encoder: sequence-to-vector network, decoder: vector-to-sequence network
+![RNN](img/RNN.ipg)
+
+## Autocorrelated
+When a time series is correlated with a lagged version of itself, we say that the time series is autocorrelated.
+
+## Random Forest
+The random forest algorithm introduces extra randomness when growing trees; instead of searching for the very best feature when splitting a node, it searches for the best feature among a random subset of features. By default, it samples $\sqrt n$ features. The algorithm results in greater tree diversity, which trades a higher bias for a lower variance
