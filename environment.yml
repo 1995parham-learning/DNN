@@ -6,5 +6,4 @@ dependencies:
   - jupyterlab
   - geopandas
   - scikit-learn
-  - keras_tuner
 always_yes: false
