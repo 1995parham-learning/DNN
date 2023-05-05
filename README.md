@@ -97,6 +97,10 @@ To understand why, suppose you are asked to draw a forest using some drawing sof
 
 Real-world data is often structured in such a hierarchical way, and deep neural networks automatically take advantage of this fact: lower hidden layers model low-level structures (e.g., line segments of various shapes and orientations), intermediate hidden layers combine these low-level structures to model intermediate-level structures (e.g., squares, circles), and the highest hidden layers and the output layer combine these intermediate structures to model high-level structures (e.g., faces)
 
+## Batch Size
+The main benefit of using large batch sizes is that hardware accelerators like GPUs can process them efficiently but large batch sizes often lead to training instabilities, especially at the beginning of training, and the resulting model may not generalize as well as a model trained with a small batch size.
+
+
 This hierarchical architecture help DNNs:
 1. converge faster
 2. improves their ability to generalize to new datasets
