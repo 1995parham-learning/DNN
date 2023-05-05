@@ -123,7 +123,7 @@ In the case of the basic cells, the output is just equal to the state, but in mo
 2. sequence-to-vector network: feed a movie review words and output a sentiment score
 3. vector-to-sequence network: captioning an image
 4. encoder-decoder: translating a sentence, encoder: sequence-to-vector network, decoder: vector-to-sequence network
-![RNN](img/RNN.ipg)
+![RNN](img/RNN.jpg)
 
 ## Autocorrelated
 When a time series is correlated with a lagged version of itself, we say that the time series is autocorrelated.
