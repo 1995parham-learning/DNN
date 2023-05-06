@@ -146,6 +146,10 @@ power to preserve all the useful information from the inputs. No matter how big 
 that information will never be recovered. In general you will get more bang for your buck by increasing the number of
 layers instead of the number of neurons per layer.
 
+## Batch Size
+The main benefit of using large batch sizes is that hardware accelerators like GPUs can process them efficiently but large batch sizes often lead to training instabilities, especially at the beginning of training, and the resulting model may not generalize as well as a model trained with a small batch size.
+
+
 This hierarchical architecture help DNNs:
 1. converge faster
 2. improves their ability to generalize to new datasets
@@ -172,7 +176,7 @@ case.
 2. sequence-to-vector network: feed a movie review words and output a sentiment score
 3. vector-to-sequence network: captioning an image
 4. encoder-decoder: translating a sentence, encoder: sequence-to-vector network, decoder: vector-to-sequence network
-![RNN](img/RNN.ipg)
+![RNN](img/RNN.jpg)
 
 ## Autocorrelated
 When a time series is correlated with a lagged version of itself, we say that the time series is autocorrelated.
