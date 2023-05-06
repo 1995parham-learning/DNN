@@ -197,5 +197,5 @@ only way to know is to try both and compare them.
 # Tensorboard
 ## HPARAMS
 ![table_view](img/table_view.png)
-![table_view](img/table_view.png)
-![table_view](img/table_view.png)
+![table_view](img/parallel_coordinates_view.png)
+![table_view](img/scatterplot_matrix_view.png)
