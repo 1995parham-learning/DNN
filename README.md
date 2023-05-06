@@ -193,3 +193,9 @@ variance
 ### Extra Tree
 It is hard to tell in advance whether a Random Forest will perform better or worse than an Extra Trees. Generally, the 
 only way to know is to try both and compare them.
+
+# Tensorboard
+## HPARAMS
+![table_view](img/table_view.png)
+![table_view](img/table_view.png)
+![table_view](img/table_view.png)
