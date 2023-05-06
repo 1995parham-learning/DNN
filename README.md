@@ -154,6 +154,9 @@ This hierarchical architecture help DNNs:
 1. converge faster
 2. improves their ability to generalize to new datasets
 
+## Hyperband
+It starts by training many different models for few epochs, then it eliminates the worst models and keeps only the 1/factor models, repeating this selection process until a single model is left.
+
 # RNN
 Output of a recurrent layer for a single instance
 $$y(t) = \phi(W_x^T x(t) + W_y^T y(t-1) + b)$$
