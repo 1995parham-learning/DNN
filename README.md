@@ -199,3 +199,21 @@ only way to know is to try both and compare them.
 ![table_view](img/table_view.png)
 ![table_view](img/parallel_coordinates_view.png)
 ![table_view](img/scatterplot_matrix_view.png)
+
+# SVM
+## C
+Reducing C makes the street larger, but it also leads to more margin violation, so there is less risk of overfitting. If
+you reduce it too much, then the model ends up underfitting. If your SVM model is overfitting, you can try regularizing 
+it by reducing C.
+## SVM predict probability
+"decision_function" function in SVM measures the signed distance between each instance and the decision boundary.
+```python
+>>> svm_clf.decision_function(X_new)
+array([0.66, -0.22])
+```
+Unlike LogisticRegression, LinearSVC doesn't have a predict_proba() method to estimate the class probabilities, That 
+said, if you use the SVC class instead of LinearSVC, and if you set its probability hyperparameter to True, then the 
+model will fit an extra model at the end of training to map the SVM decision function scores to estimated probabilities.
+Under the hood, this requires using 5-fold cross-validation to generate out-of-sample predictions for every instance in 
+the training set, then training a LogisticRegression model, so it will slow down training considerably. After that, the 
+predict_proba() and predict_log_proba() methods will be available.
