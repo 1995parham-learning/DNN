@@ -161,6 +161,14 @@ It starts by training many different models for few epochs, then it eliminates t
 Output of a recurrent layer for a single instance
 $$y(t) = \phi(W_x^T x(t) + W_y^T y(t-1) + b)$$
 
+## Difficulties
+- Unstable gradients which can be alleiviated using various techniques including recurrent dropout and recurrent layer normalization
+- A (vary) limited short-term memory, which can be extended using LSTM and GRU cells
+
+For small sequences, a regular dense network and for very long sequences CNNs can work quite well.
+
+Many reseachers prefer to use the tanh activation function in RNNs rather than ReLU.
+
 ## Memory Cells
 $Y(t)$ is a function of $X(t)$ and $Y(t-1)$ which is a function of $X(t-1)$ and $Y(t-2)$ and so on. This makes $Y(t)$ a 
 function of all the inputs since  time = 0.
@@ -189,6 +197,18 @@ Differencing is a common technique used to remove trend and seasonality from a t
 stationary time series, meaning one whose statistical properties remain constant over time, without any seasonality or
 trends. Once you're able to make accurate forecasts on the differenced time series, it's easy to turn them into 
 forecasts for the actual time series by just adding back the past values that were previously subtracted
+
+## ARMA Model Family
+### Differencing
+Using differencing over a single time step will produce an approximation of the derivative of the time time series. This means
+that it will eliminate any linear trend, transforming it into a constant value. If the original time series has a quadratic trand then two rounds of differencing will eliminate quadratic trends.
+
+### SARIMA
+It models the time series in the same way as ARIMA, but it additionally models a seasonal component for a given frequency (e.g. weekly)
+using the exact same ARIMA approach.
+
+Good p,q,P and Q values are usually fairly samll (typically 0 to 2, sometimes up to 5 or 6), and d and D are typically 0 or 1, sometimes 2.
+There are more principled approaches to selecting good hyperparameters, based on analyzing the ACF and PACF or minimizing AIC or BIC but grid search is a good place to start
 
 ## Random Forest
 The random forest algorithm introduces extra randomness when growing trees; instead of searching for the very best 
