@@ -184,6 +184,12 @@ case.
 ## Autocorrelated
 When a time series is correlated with a lagged version of itself, we say that the time series is autocorrelated.
 
+## Stationary
+Differencing is a common technique used to remove trend and seasonality from a time series: it's easier to study a 
+stationary time series, meaning one whose statistical properties remain constant over time, without any seasonality or
+trends. Once you're able to make accurate forecasts on the differenced time series, it's easy to turn them into 
+forecasts for the actual time series by just adding back the past values that were previously subtracted
+
 ## Random Forest
 The random forest algorithm introduces extra randomness when growing trees; instead of searching for the very best 
 feature when splitting a node, it searches for the best feature among a random subset of features. By default, 
@@ -217,3 +223,8 @@ model will fit an extra model at the end of training to map the SVM decision fun
 Under the hood, this requires using 5-fold cross-validation to generate out-of-sample predictions for every instance in 
 the training set, then training a LogisticRegression model, so it will slow down training considerably. After that, the 
 predict_proba() and predict_log_proba() methods will be available.
+
+# Training Models Across Multiple Devices
+## Model Parallelism
+
+## Data Parallelism
