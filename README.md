@@ -248,3 +248,21 @@ predict_proba() and predict_log_proba() methods will be available.
 ## Model Parallelism
 
 ## Data Parallelism
+
+# Auto Encoder
+Autoencoders can act as feature detectors, and they can be used for unsupervised pretraining of deep neural networks.
+
+Some autoencoders are generative models
+
+# ReLU
+A neuron dies when its weights get tweaked in such a way that the input of the ReLU function is negative for all 
+instances in the training set so it just keeps outputting zeros, and gradient descent does not affect it anymore because 
+the gradient of the ReLU function is zero when its input is negative. A dead neuron may come back to life if its inputs 
+evolve over time
+
+1. Leaky ReLU
+2. randomized leaky ReLU (RReLU), seemed to act as a regularizer
+3. parametric leaky ReLU (PReLU)
+
+They all suffer from not being smooth function, their derivatives abruptly change at z = 0. This sort of discontinuity 
+can make gradient descent bounce around the optimum and slow down convergence.
